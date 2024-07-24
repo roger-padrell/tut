@@ -11,14 +11,25 @@
     winload = function(){
       //signed in?ndow.o
       if(!localStorage.tutusr){
-        //not signed in
+        jsonbin.get(function(dt=null){
+          if(prompt("Account?") == "Y"){
+            let usr = prompt("usr");
+            if(dt.usr[usr].pswd == prompt("pswd")){
+              localStorage.usr = usr;
+            }
+            else{alert("Incorrect login or password")
+                location.reload()}
+          }
+        })
       }
       else{
         jsonbin.get(loadPage)
       }
     }
-    function loadPage(){
-      for(jsonbin.dt)
+    function loadPage(dt=null){
+      jsonbin.dt.usr[localStorage.tutusr].crs.forEach(function(crs){
+        console.log(crs);
+      })
     }
   </script>
 </html>
