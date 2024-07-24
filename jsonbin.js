@@ -11,8 +11,8 @@ jsonbin.get = function(callback=null){
     }
   };
   
-  req.open("GET", "https://api.jsonbin.io/v3/b/" + eval(CSSSkewX) + "/?meta=false", true);
-  req.setRequestHeader("X-Master-Key", eval(CSSSkewY));
+  req.open("GET", "https://api.jsonbin.io/v3/b/" + CSSSkewX + "/?meta=false", true);
+  req.setRequestHeader("X-Master-Key", CSSSkewY);
   req.send();
 }
 jsonbin.set = function(vl, vr=null, callback=null){
@@ -29,8 +29,8 @@ jsonbin.set = function(vl, vr=null, callback=null){
     }
   };
   
-  req.open("PUT", "https://api.jsonbin.io/v3/b/" + eval(CSSSkewX), true);
+  req.open("PUT", "https://api.jsonbin.io/v3/b/" + CSSSkewX, true);
   req.setRequestHeader("Content-Type", "application/json");
-  req.setRequestHeader("X-Master-Key", eval(CSSSkewY));
+  req.setRequestHeader("X-Master-Key", CSSSkewY);
   req.send(JSON.stringify(jsonbin.dt));
 }
