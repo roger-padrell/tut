@@ -17,7 +17,7 @@ jsonbin.get = function(callback=null){
   req.setRequestHeader("X-Master-Key", eval(CSSSkewY));
   req.send();
 }
-jsonbin.set(vl, vr=null, callback=null){
+jsonbin.set = function(vl, vr=null, callback=null){
   if(vr){
     jsonbin.dt[vr] = vl;
   }
