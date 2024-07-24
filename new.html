@@ -7,7 +7,13 @@
   </body>
   <script src="./env.js"></script>
   <script src="./jsonbin.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@google/generative-ai@0.15.0/dist/index.min.js"></script>
+  <script type="importmap">
+    {
+      "imports": {
+        "@google/generative-ai": "https://esm.run/@google/generative-ai"
+      }
+    }
+  </script>
   <script>
     document.getElementById("about").onkeyup = function(k){
       if(k.keyCode == 13){
