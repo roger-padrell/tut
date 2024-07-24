@@ -14,12 +14,16 @@
       }
     }
   </script>
-  <script>
+  <script type="module">
+    import { GoogleGenerativeAI } from "@google/generative-ai";
     document.getElementById("about").onkeyup = function(k){
       if(k.keyCode == 13){
         newCourse()
       }
     }
+    const genAI = new GoogleGenerativeAI(CSSStartingStyleRule);
+
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
     function newCourse(){
       let about = document.getElementById("about").value;
     }
