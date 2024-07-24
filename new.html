@@ -16,16 +16,48 @@
   </script>
   <script type="module">
     import { GoogleGenerativeAI } from "@google/generative-ai";
-    document.getElementById("about").onkeyup = function(k){
+    document.getElementById("about").onkeyup = async function(k){
       if(k.keyCode == 13){
         newCourse()
       }
     }
+
+    jsonbin.get()
     const genAI = new GoogleGenerativeAI(CSSStartingStyleRule);
 
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
-    function newCourse(){
-      let about = document.getElementById("about").value;
+    const model = genAI.getGenerativeModel({
+      model: "gemini-1.5-flash",
+      systemInstruction: "Create a course about the topic provided by the user with two type of slides: explanations and questions. In the explanation ones you should give content about the topic, and in the question ones, you should test that content you just delivered. There should be more questions than explanation slides, for every explanation, minimum 3 questions. Everything has to be given within a js array of JSONs. The explanation slides should be like the following: {\"type\":\"explanation\",\"content\":\"<HERE GOES THE EXPLANATION CONTENT IN HTML FORMAT>\"}. The question ones can be from this types: Word sorting {\"type\":\"word-sort\",\"question\":\"<HERE GOES THE QUESTION>\",\"words\":[<HERE GOES THE SENTENCE DIVIDED BY WORDS>]}, Four buttons {\"type\":\"quiz\",\"question\":\"<HERE GOES THE QUESTION>\",\"answers\":[<HERE GO THE FOUR ANSWERS>], \"correct\":\"<HERE GOES THE CORRECT ANSWER ID>\"} or sentence finishing {\"type\":\"finish\",\"question\":\"<HERE GOES THE QUESTION>\",\"sentence\":\"<HERE GOES THE START OF THE SENTENCE>\", \"correct\":[<HERE GO A LIST OF POSSIBLE WORDS FOR FINISHING THAT SENTENCE>]}",
+    });
+    async function newCourse(){
+      window.about = document.getElementById("about").value;
+      run(q)
+    }
+    async function run(q) {
+      const prompt = "Create a course about " + about;
+    
+      const result = await model.generateContent(prompt);
+      const response = result.response;
+      const text = response.text();
+      window.course = JSON.parse(text);
+      openCourse()
+    }
+    function openCourse(){
+      window.output = {};
+      output.course = window.course;
+      output.addToServer = true;
+      output.currentSlide = 0;
+      output.name = about;
+      output.id = generateID();
+    }
+    function generateID(){
+      return localStorage.tutusr[0] + jsonbin.dt.usr[localStorage.tutusr].count + localStorage.tutusr[localStorage.tutusr.length-1];
+      jsonbin.dt.usr[localStorage.tutusr].count += 1;
+      jsonbin.set(usr, jsonbin.dt.usr, openTab)
+    }
+    function openTab(){
+      sessionStorage.crs = JSON.stringify(output);
+      window.location.href = "course?" + output.id;
     }
   </script>
 </html>
