@@ -1,0 +1,16 @@
+<html>
+  <head>
+    <title>Loading... - TUT</title>
+  </head>
+  <body>
+    
+  </body>
+  <script src="./jsonbin.js"></script>
+  <script>
+    let course = JSON.parse(sessionStorage.course);
+    if(course.id != window.location.href.split("?")[1]){
+      alert("An error has ocurred. Redirecting you to the main page. Sorry.")
+    }
+    document.body.innerHTML = course.course;
+  </script>
+</html>
