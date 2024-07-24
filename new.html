@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <title>New course - TUT</title>
+  </head>
+  <body>
+    <input id=about"><button onclick="newCourse()">+</button>
+  </body>
+  <script src="./jsonbin.js"></script>
+  <script>
+    document.getElementById("about").onkeyup = function(k){
+      if(k.keyCode == 13){
+        newCourse()
+      }
+    }
+    function newCourse(){
+      let about = document.getElementById("about").value;
+    }
+  </script>
+</html>
