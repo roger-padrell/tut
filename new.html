@@ -14,15 +14,13 @@
       }
     }
   </script>
-  <script>
+  <script type="module">
     import { GoogleGenerativeAI } from "@google/generative-ai";
     document.getElementById("about").onkeyup = async function(k){
       if(k.keyCode == 13){
         newCourse()
       }
     }
-  </script>
-  <script>
     jsonbin.get()
     const genAI = new GoogleGenerativeAI(CSSStartingStyleRule);
 
