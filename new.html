@@ -53,7 +53,7 @@
     function generateID(){
       return localStorage.tutusr[0] + jsonbin.dt.usr[localStorage.tutusr].count + localStorage.tutusr[localStorage.tutusr.length-1];
       jsonbin.dt.usr[localStorage.tutusr].count += 1;
-      jsonbin.set(usr, jsonbin.dt.usr, openTab)
+      jsonbin.set("usr", jsonbin.dt.usr, openTab)
     }
     function openTab(){
       sessionStorage.crs = JSON.stringify(output);
