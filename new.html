@@ -30,10 +30,10 @@
     });
     async function newCourse(){
       window.about = document.getElementById("about").value;
-      run(q)
+      run(about)
     }
     async function run(q) {
-      const prompt = "Create a course about " + about;
+      const prompt = "Create a course about " + q;
     
       const result = await model.generateContent(prompt);
       const response = result.response;
