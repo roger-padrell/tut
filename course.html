@@ -11,6 +11,26 @@
     if(course.id != window.location.href.split("?")[1]){
       alert("An error has ocurred. Redirecting you to the main page. Sorry.")
     }
+    window.onbeforeunload = function(){
+        saveProgress()
+        return null;
+      }
+    jsonbin.get()
+    function saveProgress(){
+      let object = {};
+      object.course = course.course;
+      object.id = course.id;
+      object.name = course.name;
+      object.currentSlide = currentSlide;
+      if(course.addToServer){
+        jsonbin.dt.usr[localStorage.tutusr].crs.push(object);
+      }
+      else{
+        jsonbin.dt.usr[localStorage.tutusr].crs[course.id.replace(localStorage.tutusr[0],"").replace(localStorage.tutusr[localStorage.tutusr.length-1],"")].currentSlide = currentSlide;
+      }
+      jsonbin.set(null)
+    }
     document.body.innerHTML = course.course;
+    
   </script>
 </html>
